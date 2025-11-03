@@ -3,6 +3,7 @@ const socket = io()
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
+const chatContainer = document.querySelector('.chat-container')
 console.log(user)
 
 
@@ -10,7 +11,7 @@ socket.on('welcome', welcome => {
     const item = document.createElement('li');
     item.textContent = welcome.time + ' ' + welcome.username + ': ' + welcome.text;
     messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
+    chatContainer.scrollTop = chatContainer.scrollHeight
 })
 
 //sends message to server on submit
@@ -39,5 +40,5 @@ socket.on('chat message', (msg) => {
     item.textContent = `${msg.text}`;
     item.appendChild(detail)
     messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
+    chatContainer.scrollTop = chatContainer.scrollHeight
 });

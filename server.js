@@ -47,7 +47,7 @@ const io = new Server(server, {
 const botName = 'Bot'
 
 io.on('connection', (socket) => {
-    // console.log('a user connection')                 //console logs a new connection 
+     console.log(socket.id)                 //console logs a new connection 
     
     //Welcome user
     socket.emit('welcome', formatMessage(botName, 'Welcome to the chat!'))      //sends message to the client-side JS
