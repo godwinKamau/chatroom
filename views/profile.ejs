@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+<body>
+    <section class="profileContainer">
+        <h1>Welcome <%= user %></h1>
+        <form action="/chat" method="get">
+            <label for="house">Choose a house</label>
+            <select id="house" name="house">
+                <option value="Cass">Houe Cass</option>
+                <option value="Gardner">House Gardner</option>
+                <option value="Hayden">House Hayden</option>
+                <option value="Moses">House Moses</option>
+            </select>
+            <button type="submit">Go!</button>
+        </form>
+    </section>
+</body>
+</html>

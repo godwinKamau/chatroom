@@ -7,12 +7,16 @@ const connectToMongo = require('./db')
 const MongoStore = require('connect-mongo')
 const port = 3000
 const formatMessage = require('./utils/messages.js')
+const { userJoin, getCurrentUser,userLeave,getRoomUsers } = require('./utils/users.js')
+const morgan = require('morgan')
 
 const { createServer } = require('node:http');
 const { Server } = require('socket.io')
 
 const app = express();
-app.set('viewengine','ejs')
+app.set('view engine','ejs')
+app.set('views', path.join(__dirname, 'views'));
+app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname,'public')))
 const User = require('./User')
 connectToMongo()
@@ -47,22 +51,42 @@ const io = new Server(server, {
 const botName = 'Bot'
 
 io.on('connection', (socket) => {
-     console.log(socket.id)                 //console logs a new connection 
+    socket.on('joinRoom', ({ username, room }) => {
+        const user = userJoin(socket.id, username , room.house)
+        console.log(user)
+        socket.join(room.house)
+        //Welcome user
+        socket.emit('welcome', formatMessage(botName, `Welcome to House ${room.house}!`))      //sends message to the client-side JS
+        //Announces presence to other users
+        socket.broadcast.to(user.room).emit('welcome', formatMessage(botName,`${user.username} has joined the chat`))
+
+        //send room info
+        io.to(user.room).emit('roomUsers', {
+            room:user.room,
+            users: getRoomUsers(user.room)
+        })
+    })
     
-    //Welcome user
-    socket.emit('welcome', formatMessage(botName, 'Welcome to the chat!'))      //sends message to the client-side JS
-    //Announces presence to other users
-    socket.broadcast.emit('welcome', formatMessage(botName,'A user has joined the chat'))
-    
-    socket.on('chat message', (user, msg) => {
-        // console.log('message: ' + msg)
-        io.emit('chat message', formatMessage(user, msg))
+    socket.on('chat message', (msg) => {
+        const user = getCurrentUser(socket.id)
+        console.log('message: ' + msg)
+        console.log(user.room)
+        io.to(user.room).emit('chat message', formatMessage(user.username, msg))
     })
     socket.on('disconnect', () => {
+        const user = userLeave(socket.id)
         // console.log('user disconnected');
+        if (user) {
+            io.to(user.room).emit('welcome', formatMessage(botName,`${user.username} has disconnected`))
 
+            //send room info
+        io.to(user.room).emit('roomUsers', {
+            room:user.room,
+            users: getRoomUsers(user.room)
+        })
+        }
         //tells everyone a user has left
-        io.emit('welcome', formatMessage(botName,'A user has disconnected'))
+        
     });
 })
 //==================

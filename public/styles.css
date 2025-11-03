@@ -1,5 +1,9 @@
+*{
+    box-sizing:border-box;
+}
 body {
     margin: 0;
+    height:100vh;
     padding-bottom: 3rem;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     display: flex;
@@ -82,4 +86,13 @@ form>button {
 
 .chatBox form {
     min-height: 3rem;
+}
+
+.topBar{
+    width: 600px;
+    background:rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
 }

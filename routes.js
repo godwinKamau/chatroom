@@ -39,7 +39,7 @@ module.exports = function(app) {
     app.get('/profile', function(req, res) {
         console.log(req.session)
         if (req.isAuthenticated()) {
-        res.render(path.join(__dirname,'/views/chat.ejs'), {user:req.session.passport.user})
+        res.render(('profile'), {user:req.session.passport.user})
         } else {
         res.sendFile(path.join(__dirname,'/public/login.html'))
         }
@@ -51,4 +51,16 @@ module.exports = function(app) {
         res.redirect('/');
         });
     });
+
+    app.get('/chat', function(req,res){
+        if (!req.isAuthenticated()) {
+            return res.sendFile(path.join(__dirname,'/public/login.html'));
+        }
+        
+        
+        res.render(('chat'),{ user: req.session.passport.user })
+        
+    })
+
+    
 };

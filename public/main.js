@@ -1,10 +1,22 @@
+const room = Qs.parse(location.search, {
+    ignoreQueryPrefix:true
+})
+
 const socket = io()
 
+console.log(username)
+
+socket.emit('joinRoom', { username, room })
+
+socket.on('roomUsers', ({ room, users })=>{
+    outputRoomName(room)
+}) 
+
+// console.log(room)
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
 const chatContainer = document.querySelector('.chat-container')
-console.log(user)
 
 
 socket.on('welcome', welcome => {
@@ -21,7 +33,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (input.value) {
         //emit message to server
-        socket.emit('chat message', user, input.value);
+        socket.emit('chat message', input.value);
 
         //reset input   
         input.value = '';
@@ -42,3 +54,8 @@ socket.on('chat message', (msg) => {
     messages.appendChild(item);
     chatContainer.scrollTop = chatContainer.scrollHeight
 });
+
+//////////////
+function outputRoomName(room){
+    document.querySelector('#roomName').innerText = `House ${room}`
+}
