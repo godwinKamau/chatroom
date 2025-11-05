@@ -5,17 +5,17 @@ const path = require('path')
 module.exports = function(app) {
 
     app.post('/register', function (req, res) {
-    User.register(
-        new User({ 
-            email: req.body.email, 
-            username: req.body.username 
-        }), req.body.password, function (err, msg) {
-            if (err) {
-            res.send(err);
-            } else {
-            res.redirect('/profile');
+        User.register(
+            new User({ 
+                email: req.body.email, 
+                username: req.body.username 
+            }), req.body.password, function (err, msg) {
+                if (err) {
+                res.send(err);
+                } else {
+                res.redirect('/profile');
+                }
             }
-        }
         )
     })
 
@@ -37,7 +37,7 @@ module.exports = function(app) {
     });
 
     app.get('/profile', function(req, res) {
-        console.log(req.session)
+        console.log(req.body)
         if (req.isAuthenticated()) {
         res.render(('profile'), {user:req.session.passport.user})
         } else {
