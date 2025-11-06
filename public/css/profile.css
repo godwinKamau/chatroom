@@ -1,0 +1,53 @@
+#profileContainer{
+    padding:10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:auto;
+}
+
+pre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2{
+    font-family: monospace;
+    font-size: 1.2rem;
+}
+
+.houseContainer{
+    scale:100%;
+    transition:all .5s;
+}
+
+.houseContainer:hover{
+    scale:120%;
+    color:rgb(0, 106, 255);
+}
+
+input[type="radio"]{
+    appearance: none;
+}
+
+input[type="radio"]:checked + label{
+    color:rgb(0, 106, 255);
+    text-decoration: underline;
+}
+
+label{
+    font-size: 2rem;
+    font-family: monospace;
+}
+
+button{
+    height:3rem;
+    width:4rem;
+    font-size: 1.5rem;
+}
+
+button:hover{
+    background:rgb(0, 106, 255);
+}
+

@@ -10,20 +10,22 @@
     </script>
   </head>
   <body>
-    <section class="topBar">
-    <form action="/logout" method="post">
-        <button type="submit">Logout</button>
-    </form>
-    <h2 id="roomName"></h2>
+    <section class="biggerBox">
+      <section class="topBar">
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+        <pre id="roomName"></pre>
+      </section>
+      <section class="chatBox">
+        <section class="chat-container">
+          <ul id="messages"></ul>
+        </section>
+        <form id="form" action="">
+          <input id="input" autocomplete="off" /><button>Send</button>
+        </form>
+      </section>
     </section>
-    <section class="chatBox">
-      <section class="chat-container">
-        <ul id="messages"></ul>
-      </section>
-      <form id="form" action="">
-        <input id="input" autocomplete="off" /><button>Send</button>
-      </form>
-      </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.14.0/qs.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script type="application/javascript" src="js/main.js"></script>

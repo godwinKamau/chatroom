@@ -1,6 +1,7 @@
 const passport = require('passport')
 const User = require('./User')
 const path = require('path')
+const figlet = require('figlet')
 
 module.exports = function(app) {
 
@@ -56,11 +57,28 @@ module.exports = function(app) {
         if (!req.isAuthenticated()) {
             return res.sendFile(path.join(__dirname,'/public/login.html'));
         }
-        
-        
         res.render(('chat'),{ user: req.session.passport.user })
         
     })
 
-    
+    app.get('/ascii/:words', (req,res) => {
+        //make words uppercase
+        const request = req.params.words
+            .split(' ')
+            .map(word => {
+            const letters = word.split('')
+            letters.splice(0,1,(letters[0].toUpperCase()))
+            return letters.join('')  
+            })
+            .join(' ')
+        
+        figlet(request, function (err, data) {
+            if (err) {
+                console.log("Something went wrong...");
+                console.dir(err);
+                return;
+            }
+            res.send(data)
+            })
+    })
 };

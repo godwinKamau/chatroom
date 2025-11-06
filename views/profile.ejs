@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
+    <link rel="stylesheet" href="css/logandsign.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <script>const user = <%- JSON.stringify(user) %></script>
 </head>
 <body>
-    <section class="profileContainer">
-        <h1>Welcome <%= user %></h1>
+    <container id="profileContainer">
+        <pre></pre>
         <form action="/chat" method="get">
-            <label for="house">Choose a house</label>
-            <select id="house" name="house">
-                <option value="Cass">Houe Cass</option>
-                <option value="Gardner">House Gardner</option>
-                <option value="Hayden">House Hayden</option>
-                <option value="Moses">House Moses</option>
-            </select>
+            
+            <h2>Choose Your House</h2>
+            <div class="houseContainer"><input type="radio" name="house" id="cass" value="Cass" checked><label for="cass">House Cass</label></div>
+            <div class="houseContainer"><input type="radio" name="house" id="gardner" value="Gardner"><label for="gardner">House Gardner</label></div>
+            <div class="houseContainer"><input type="radio" name="house" id="hayden" value="Hayden"><label for="hayden">House Hayden</label></div>
+            <div class="houseContainer"><input type="radio" name="house" id="moses" value="Moses"><label for="moses">House Moses</label></div>
+            
             <button type="submit">Go!</button>
         </form>
-    </section>
+    </container>
+    <script type="text/javascript" src="js/choosehouse.js"></script>
 </body>
 </html>

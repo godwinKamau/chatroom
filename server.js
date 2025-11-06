@@ -48,7 +48,7 @@ const server = createServer(app);
 const io = new Server(server, {
     connectionStateRecovery: {}
 })
-const botName = 'Bot'
+const botName = 'HOUSE BOT'
 
 io.on('connection', (socket) => {
     socket.on('joinRoom', ({ username, room }) => {

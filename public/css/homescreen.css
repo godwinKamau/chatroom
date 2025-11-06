@@ -1,0 +1,26 @@
+.homescreen{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+pre{
+    height:70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#go{
+    width: 100%;
+    height:100%;
+    background:black;
+    transition: all .3s;
+    margin-bottom: -5px;
+}
+
+#go:hover{
+    background: white;
+    color: black;
+    scale:100%;
+}

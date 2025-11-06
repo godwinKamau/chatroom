@@ -4,7 +4,7 @@ const room = Qs.parse(location.search, {
 
 const socket = io()
 
-console.log(username)
+console.log(room)
 
 socket.emit('joinRoom', { username, room })
 
@@ -19,9 +19,17 @@ const messages = document.getElementById('messages');
 const chatContainer = document.querySelector('.chat-container')
 
 
+
+
 socket.on('welcome', welcome => {
     const item = document.createElement('li');
-    item.textContent = welcome.time + ' ' + welcome.username + ': ' + welcome.text;
+    item.classList.add('message')
+    const detail = document.createElement('span')
+    const time = welcome.time
+    const from = welcome.username
+    detail.textContent = `${time} by ${from}`
+    item.textContent = welcome.text;
+    item.appendChild(detail)
     messages.appendChild(item);
     chatContainer.scrollTop = chatContainer.scrollHeight
 })
@@ -57,5 +65,9 @@ socket.on('chat message', (msg) => {
 
 //////////////
 function outputRoomName(room){
-    document.querySelector('#roomName').innerText = `House ${room}`
+    fetch(`/ascii/house%20${room}`)
+        .then(res => res.text())
+        .then(data => {
+            document.querySelector('#roomName').innerText = `${data}`        
+        })
 }
