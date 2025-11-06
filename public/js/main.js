@@ -1,3 +1,5 @@
+//========================= Basic Chatroom set-up made from following Traversy Media: https://www.youtube.com/watch?v=jD7FnbI76Hg# 
+//========================= and socket.io tutorial: https://socket.io/docs/v4/tutorial/introduction
 const room = Qs.parse(location.search, {
     ignoreQueryPrefix:true
 })
@@ -17,8 +19,6 @@ const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
 const chatContainer = document.querySelector('.chat-container')
-
-
 
 
 socket.on('welcome', welcome => {
@@ -71,3 +71,9 @@ function outputRoomName(room){
             document.querySelector('#roomName').innerText = `${data}`        
         })
 }
+
+document.addEventListener('keydown', (event) => { 
+    if(event.code === "Backslash"){
+        keyRecorders()
+    }
+})

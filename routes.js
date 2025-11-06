@@ -14,7 +14,10 @@ module.exports = function(app) {
                 if (err) {
                 res.send(err);
                 } else {
-                res.redirect('/profile');
+                res.render(('login'), {
+                    alert:true,
+                    message:"User Authenticated"
+                });
                 }
             }
         )
@@ -29,7 +32,7 @@ module.exports = function(app) {
 
     app.get('/sign-in', (req, res, next) => {
         console.log('not authenticated');
-        res.sendFile(path.join(__dirname,'/public/login.html'))
+        res.render(('login'),{alert:false})
     });
 
     app.get('/login-success', (req, res, next) => {
@@ -42,7 +45,7 @@ module.exports = function(app) {
         if (req.isAuthenticated()) {
         res.render(('profile'), {user:req.session.passport.user})
         } else {
-        res.sendFile(path.join(__dirname,'/public/login.html'))
+        res.render(('login'), {alert:false})
         }
     })
 
@@ -55,7 +58,7 @@ module.exports = function(app) {
 
     app.get('/chat', function(req,res){
         if (!req.isAuthenticated()) {
-            return res.sendFile(path.join(__dirname,'/public/login.html'));
+            return res.render(('login'));
         }
         res.render(('chat'),{ user: req.session.passport.user })
         

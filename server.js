@@ -44,10 +44,13 @@ app.use(passport.session());
 require('./routes.js')(app);
 
 //============Chatroom stuff
+//========================= Basic Chatroom set-up made from following Traversy Media: https://www.youtube.com/watch?v=jD7FnbI76Hg# 
+//========================= and socket.io tutorial: https://socket.io/docs/v4/tutorial/introduction
 const server = createServer(app);       
 const io = new Server(server, {
     connectionStateRecovery: {}
 })
+ 
 const botName = 'HOUSE BOT'
 
 io.on('connection', (socket) => {
