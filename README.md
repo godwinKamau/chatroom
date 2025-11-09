@@ -1,6 +1,8 @@
 # House Chat
 
-A full stack app that uses passport authentication and MongoDB to create chatrooms.
+A full stack app that uses socket.io, passport authentication and MongoDB to create chatrooms.
+
+[Made to explore concepts in demo-day project.]
 
 <hr>
 
@@ -10,11 +12,11 @@ A full stack app that uses passport authentication and MongoDB to create chatroo
 
 ## Sources: 
 
-Tutorial from the socket.io tutorial: https://socket.io/docs/v4/tutorial/introduction
+Tutorial from the socket.io documentation: https://socket.io/docs/v4/tutorial/introduction
 
 <br>
 
-Video about chatrooms: https://www.youtube.com/watch?v=jD7FnbI76Hg#
+Traversy video about socket.io: https://www.youtube.com/watch?v=jD7FnbI76Hg#
 
 <hr>
 
